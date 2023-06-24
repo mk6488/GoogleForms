@@ -1,12 +1,20 @@
-import { Link } from "expo-router";
-import React from "react";
+import { useRouter } from "expo-router";
 import { Text, View } from "react-native";
+import { Button } from "react-native-paper";
 
 export default function DeliveryDetails() {
+  const router = useRouter();
+
+  const nextPage = () => {
+    router.push("/checkout/payment");
+  };
   return (
     <View>
-      <Text>Delivery details</Text>
-      <Link href="/checkout/payment">Next</Link>
+      <Text style={{ fontSize: 30 }}>Delivery details</Text>
+
+      <Button onPress={nextPage} mode="contained">
+        Next
+      </Button>
     </View>
   );
 }
