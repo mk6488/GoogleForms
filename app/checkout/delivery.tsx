@@ -3,12 +3,10 @@ import { ScrollView, View } from "react-native";
 import {
   Button,
   Card,
-  TextInput,
   useTheme,
   RadioButton,
   HelperText,
 } from "react-native-paper";
-
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 

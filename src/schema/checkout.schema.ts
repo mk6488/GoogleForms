@@ -12,7 +12,12 @@ export const DeliveryInfoSchema = z.object({
   shipping: z.enum(["free", "fast", "same_day"]),
 });
 
-export const PaymenyInfoSchema = z.object({});
+export const PaymenyInfoSchema = z.object({
+  number: z.string(),
+  expirationDate: z.string(),
+  securityCode: z.string(),
+  saveInfo: z.boolean(),
+});
 
 export type PersonalInfo = z.infer<typeof PersonalInfoSchema>;
 export type DeliveryInfo = z.infer<typeof DeliveryInfoSchema>;
