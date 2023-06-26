@@ -16,6 +16,7 @@ import {
 } from "../../src/schema/checkout.schema";
 
 import ControlledInput from "../../src/components/ControlledInput";
+import { useCheckoutContext } from "../../src/contexts/CheckoutContext";
 
 export default function DeliveryDetails() {
   const { control, handleSubmit } = useForm<DeliveryInfo>({
@@ -25,10 +26,13 @@ export default function DeliveryDetails() {
     },
   });
 
+  const { setDelivery } = useCheckoutContext();
   const router = useRouter();
   const theme = useTheme();
 
-  const nextPage = () => {
+  const nextPage = (data: DeliveryInfo) => {
+    setDelivery(data);
+
     router.push("/checkout/payment");
   };
   return (

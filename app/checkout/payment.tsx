@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, Alert } from "react-native";
 import { Button, Card, useTheme, Checkbox } from "react-native-paper";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,20 +9,26 @@ import {
   PaymenyInfoSchema,
 } from "../../src/schema/checkout.schema";
 import ControlledInput from "../../src/components/ControlledInput";
+import { useCheckoutContext } from "../../src/contexts/CheckoutContext";
 
 export default function PaymentDetails() {
   const { control, handleSubmit } = useForm<PaymentInfo>({
     resolver: zodResolver(PaymenyInfoSchema),
   });
 
-  const theme = useTheme();
+  const { onSubmitAll } = useCheckoutContext();
   const router = useRouter();
+  const theme = useTheme();
 
-  const nextPage = () => {
-    //* Submit logic
+  const nextPage = async (data: PaymentInfo) => {
+    // setPayment(data);
+    const success = await onSubmitAll(data);
 
-    // TODO: link not navigating home!
-    router.push("/");
+    if (success) {
+      router.push("/");
+    } else {
+      Alert.alert("Oops, something went wrong! Failed to submit the form");
+    }
   };
   return (
     <ScrollView
