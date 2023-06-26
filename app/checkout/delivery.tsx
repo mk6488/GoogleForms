@@ -23,9 +23,6 @@ export default function DeliveryDetails() {
     resolver: zodResolver(DeliveryInfoSchema),
     defaultValues: {
       shipping: "standard",
-      address: "Flat 1 Foye House, Bridge Road",
-      city: "Leigh Woods",
-      postCode: "BS8 3PE",
     },
   });
 

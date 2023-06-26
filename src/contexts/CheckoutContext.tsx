@@ -30,7 +30,6 @@ export default function CheckoutContextProvider({ children }) {
 
     const checkoutData: CheckoutData = { ...personal, ...delivery, ...payment };
 
-    console.log("Submitting the multi step form");
     console.log(checkoutData);
 
     return true;
