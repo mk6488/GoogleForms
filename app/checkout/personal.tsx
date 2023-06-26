@@ -60,6 +60,20 @@ export default function PersonalDetails() {
             label="Email"
             keyboardType={"email-address"}
           />
+
+          <ControlledInput
+            control={control}
+            name="password"
+            label="Password"
+            secureTextEntry
+          />
+
+          <ControlledInput
+            control={control}
+            name="confirmPassword"
+            label="Confirm password"
+            secureTextEntry
+          />
         </Card.Content>
       </Card>
 

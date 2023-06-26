@@ -3,14 +3,17 @@ import { z } from "zod";
 const cardNumberRegex =
   /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9]{2})[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/;
 
-export const PersonalInfoSchema = z.object({
-  name: z
-    .string({ required_error: "Name is required" })
-    .min(2, { message: "Name should be at least two characters long" }),
-  email: z
-    .string({ required_error: "Email is required" })
-    .email({ message: "Please provide a valid email" }),
-});
+export const PersonalInfoSchema = z
+  .object({
+    name: z.string({ required_error: "Name is required" }),
+    email: z.string().email({ message: "Please provide a valid email" }),
+    password: z.string(),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });
 
 export const DeliveryInfoSchema = z.object({
   address: z.string({ required_error: "Address is required" }),
@@ -39,7 +42,7 @@ export const PaymenyInfoSchema = z.object({
 });
 
 export const CheckoutInfoSchema =
-  PersonalInfoSchema.merge(DeliveryInfoSchema).merge(PaymenyInfoSchema);
+  DeliveryInfoSchema.merge(PersonalInfoSchema).merge(PaymenyInfoSchema);
 
 export type PersonalInfo = z.infer<typeof PersonalInfoSchema>;
 export type DeliveryInfo = z.infer<typeof DeliveryInfoSchema>;
