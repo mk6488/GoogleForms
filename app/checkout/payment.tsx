@@ -48,6 +48,7 @@ export default function PaymentDetails() {
             name="number"
             label={"Card number"}
             placeholder="4242 4242 4242 4242"
+            keyboardType={"number-pad"}
           />
           <View style={{ flexDirection: "row", gap: 15 }}>
             <ControlledInput
@@ -62,6 +63,7 @@ export default function PaymentDetails() {
               label={"Security code"}
               placeholder="123"
               secureTextEntry={true}
+              keyboardType={"number-pad"}
             />
           </View>
           <Controller

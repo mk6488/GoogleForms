@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import {
+  CheckoutData,
   DeliveryInfo,
   PaymentInfo,
   PersonalInfo,
@@ -26,10 +27,11 @@ export default function CheckoutContextProvider({ children }) {
 
   const onSubmitAll = async (paymentInfo: PaymentInfo) => {
     setPayment(paymentInfo);
+
+    const checkoutData: CheckoutData = { ...personal, ...delivery, ...payment };
+
     console.log("Submitting the multi step form");
-    console.log(personal);
-    console.log(delivery);
-    console.log(paymentInfo);
+    console.log(checkoutData);
 
     return true;
   };

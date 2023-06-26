@@ -22,7 +22,10 @@ export default function DeliveryDetails() {
   const { control, handleSubmit } = useForm<DeliveryInfo>({
     resolver: zodResolver(DeliveryInfoSchema),
     defaultValues: {
-      shipping: "free",
+      shipping: "standard",
+      address: "Flat 1 Foye House, Bridge Road",
+      city: "Leigh Woods",
+      postCode: "BS8 3PE",
     },
   });
 
@@ -50,6 +53,13 @@ export default function DeliveryDetails() {
         <Card.Content style={{ gap: 10 }}>
           <ControlledInput
             control={control}
+            name="address"
+            label={"Address"}
+            style={{ backgroundColor: theme.colors.background }}
+            multiline={true}
+          />
+          <ControlledInput
+            control={control}
             name="city"
             label={"City"}
             style={{ backgroundColor: theme.colors.background }}
@@ -58,12 +68,6 @@ export default function DeliveryDetails() {
             control={control}
             name="postCode"
             label={"Postcode"}
-            style={{ backgroundColor: theme.colors.background }}
-          />
-          <ControlledInput
-            control={control}
-            name="address"
-            label={"Address"}
             style={{ backgroundColor: theme.colors.background }}
           />
         </Card.Content>
@@ -87,7 +91,7 @@ export default function DeliveryDetails() {
                   value={value}
                   onValueChange={(value) => onChange(value)}
                 >
-                  <RadioButton.Item label="Free" value="free" />
+                  <RadioButton.Item label="Standard" value="standard" />
                   <RadioButton.Item label="Fast" value="fast" />
                   <RadioButton.Item label="Same day" value="same_day" />
                 </RadioButton.Group>
